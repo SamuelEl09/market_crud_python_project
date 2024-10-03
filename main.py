@@ -15,6 +15,17 @@ def totalCost (x, y, z):
 
     return totalPrice
 
+def payment (price, cash):
+    if (price > cash):
+        i = price - cash
+        print(f"Transaksi anda dibatalkan uangnya kurang sebesar {i}")
+    elif(price < cash):
+        i = cash - price
+        print("Terima Kasih\n")
+        print(f"Uang kembali anda : {i}")
+    else:
+        print("Terima Kasih")
+
 def inputInteger(x):
     while True:
         try:
@@ -33,5 +44,9 @@ def main():
     total = totalCost(apple, orange, grapes)
 
     print(f"\nTotal : {total}")
+
+    totalCash = inputInteger("\nMasukkan jumlah uang : ")
+
+    payment(total,totalCash)
 
 main()
