@@ -26,18 +26,38 @@ def payment (price, cash):
     else:
         print("Terima Kasih")
 
-def inputInteger(x):
+def validateInput(x):
     while True:
         try:
             return int(input(x))
         except ValueError:
-            print("Input tidak valid. Silahkan masukan Angka")
+            print("Input tidak valid. Silahkan masukkan angka.")
 
+def checkStock(product, quantity, dataStock):
+    if product in dataStock and quantity <= dataStock[product]:
+        return True
+    else:
+        return False
+
+def getQuantity(x, dataStock, product):
+    while True:
+        quantity = validateInput(x)
+        if checkStock(product, quantity, dataStock):
+            return quantity
+        else:
+            print(f"Stok {product} tidak mencukupi. Stok yang tersedia: {dataStock[product]}.")
 
 def main():
-    apple = inputInteger("Masukkan Jumlah Apel : ")
-    orange = inputInteger("Masukkan Jumlah Jeruk : ")
-    grapes = inputInteger("Masukkan Jumlah Anggur : ")
+
+    fruitsStock = {
+        "apple": 20,
+        "orange": 5,
+        "grapes": 10
+    }
+
+    apple = getQuantity("Masukkan Jumlah Apel : ", fruitsStock, "apple")
+    orange = getQuantity("Masukkan Jumlah Jeruk : ", fruitsStock, "orange")
+    grapes = getQuantity("Masukkan Jumlah Anggur : ", fruitsStock, "grapes")
 
     print("\nDetail Belanja")
 
@@ -45,7 +65,7 @@ def main():
 
     print(f"\nTotal : {total}")
 
-    totalCash = inputInteger("\nMasukkan jumlah uang : ")
+    totalCash = validateInput("\nMasukkan jumlah uang : ")
 
     payment(total,totalCash)
 
